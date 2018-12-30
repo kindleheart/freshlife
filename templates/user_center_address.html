@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}user-address{% endblock title %}
+{% block topfiles %}
+    <link rel="stylesheet" href="{% static 'css/user_center_address.css' %}">
+{% endblock topfiles %}
+
+
+{% block center %}
+<div id="center">
+    <div id="center-content" class="d-flex">
+        <div id="left">
+            <div id="left-title">用户中心</div>
+            <a href="{% url 'user:user' %}"><div class="left-slide"><span>&lt</span> 个人信息</div></a>
+            <a href="{% url 'user:order' 1 %}"><div class="left-slide"><span>&lt</span> 全部订单</div></a>
+            <a href="{% url 'user:address' %}"><div class="left-slide" id="active"><span>&lt</span> 收货地址</div></a>
+        </div>
+        <div id="right">
+            <div class="right-title">收货地址</div>
+            <div class="user-address">
+                <ul>
+                    <li id="li1">当前地址:</li>
+                    <li>{{ address.addr }} （{{ address.receiver }} 收） {{ address.phone }}</li>
+                </ul>
+            </div>
+            <div class="right-title">编辑地址</div>
+            <div class="user-address">
+                <form method="post" action="{% url 'user:address' %}">
+                    {% csrf_token %}
+                    <div class="form-group form-all d-flex">
+                        <label for="receiver">用户名：</label>
+                        <input type="text" class="form-control" id="receiver" name="receiver">
+                    </div>
+                    <div class="form-group form-all d-flex">
+                        <label for="addr">详细地址：</label>
+                        <textarea class="form-control" rows="5" id="addr" name="addr"></textarea>
+                    </div>
+                    <div class="form-group form-all d-flex">
+                        <label for="postcode">邮编：</label>
+                        <input type="text" class="form-control" id="postcode" name="postcode">
+                    </div>
+                    <div class="form-group form-all d-flex">
+                        <label for="phone">手机：</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+                    <input type="submit" value="提交" id="submit-btn"><span id="error-msg">{{ errmsg }}</span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock center %}

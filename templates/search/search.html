@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}fresh life搜索结果列表{% endblock title %}
+{% block topfiles%}
+<script type="text/javascript" src="{% static 'js/add_to_cart.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock topfiles %}
+
+{% block center %}
+<div id="center">
+    <div id="center-content" class="d-flex">
+        <div id="left">
+            <div id="left-title">搜索结果</div>
+            <div class="left-slide">搜索关键字:&nbsp;&nbsp;{{ query }}</div>
+            <div class="left-slide">商品个数:&nbsp;&nbsp;{{ paginator.count }}</div>
+        </div>
+        <div id="right">
+            <ul>
+                {% for item in page %}
+                <li>
+                    <div class="goods-image">
+                        <a href="{% url 'goods:detail' item.object.id %}"><img src="{{ item.object.image.url }}"></a>
+                    </div>
+                    <div class="goods-name">
+                        <a href="{% url 'goods:detail' item.object.id %}">{{ item.object.name }}</a>
+                    </div>
+                    <div class="goods-price">￥{{ item.object.price }}</div>
+                    {% csrf_token %}
+                    <div class="add-to-cart" sku_id="{{ item.object.id }}">加入购物车</div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="pagenation">
+                {% if page.has_previous %}
+                <a href="/search?q={{ query }}&page={{ page.previous_page_number }}">&lt;</a>
+                {% endif %}
+                {% for pindex in paginator.page_range %}
+                    {% if pindex == page.number  %}
+                <a href="/search?q={{ query }}&page={{ pindex }}" class="active">{{ pindex }}</a>
+                    {% else %}
+                <a href="/search?q={{ query }}&page={{ pindex }}">{{ pindex }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if page.has_next %}
+                <a href="/search?q={{ query }}&page={{ page.next_page_number }}">&gt;</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock center %}

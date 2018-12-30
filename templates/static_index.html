@@ -1,0 +1,128 @@
+{% extends 'static_base.html' %}
+{% load staticfiles %}
+
+{% block title %}fresh life{% endblock title %}
+{% block topfiles%}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock topfiles %}
+
+{% block center %}
+<div id="center" class="container-fluid">
+    <div id="center-activity" class="d-flex">
+        <div id="rotation" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for goods in bannerList %}
+                <div class="carousel-item {% if goods.index == 1 %}active{% endif %}">
+                    <a href="#"><img class="d-block w-100" src="{{ goods.image.url }}"></a>
+                    <div class="carousel-caption">
+                        <p>{{ goods.name }}</p>
+                        <span>{{ goods.desc }}</span>
+                        <a href="#"><div class="buy-btn">BUY NOW</div></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#rotation" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#rotation" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div id="promotion">
+            <div id="promotion-1">
+                <a href="#"><img src="{{ promotionList.0.image.url }}" alt="organic"></a>
+                <div class="promotion-title">
+                    <h6 class="promotion-title-1">FRESH</h6>
+                    <h5 class="promotion-title-1">ORGANIC FRUITS</h5>
+                </div>
+            </div>
+            <div>
+                <a href="#"><img src="{{ promotionList.1.image.url }}" alt="healthy"></a>
+                <div class="promotion-title">
+                    <h6 class="promotion-title-2">100%</h6>
+                    <h5 class="promotion-title-2">HEALTHY FOODS</h5>
+                </div>
+            </div>
+        </div>
+        <div id="best-price">
+            <div id="best-price-image"><img src="{{ recommendGoods.image.url }}"></div>
+            <div id="best-price-title">
+                <div id="best-price-title-1">BEST PRICE ALWAYS</div>
+                <div id="best-price-title-2"></div>
+                <div id="best-price-title-3">Our Delicious Food At Your Doorstep!</div>
+            </div>
+        </div>
+    </div>
+    <div class="center-new-seller">
+        <div class="center-new-seller-title">
+            <div>
+                <span class="center-new-seller-title-green">NEW</span>
+                PRODUCTS
+            </div>
+        </div>
+        <div class="center-new-seller-goods">
+            <ul class="d-flex">
+                {% for goods in newList %}
+                <li>
+                    <div class="center-new-seller-image"><img src="{{ goods.image.url }}"></div>
+                    <div class="goods-name"><a href="#">{{ goods.name }}</a></div>
+                    <div class="goods-price">￥{{ goods.price }}</div>
+                    <div class="add-to-cart">ADD TO CART</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="center-new-seller">
+        <div class="center-new-seller-title">
+            <div>
+                <span class="center-new-seller-title-green">BEST</span>
+                SELLERS
+            </div>
+        </div>
+        <div class="center-new-seller-goods">
+            <ul class="d-flex">
+               {% for goods in hotList %}
+                <li>
+                    <div class="center-new-seller-image"><img src="{{ goods.image.url }}"></div>
+                    <div class="goods-name"><a href="#">{{ goods.name }}</a></div>
+                    <div class="goods-price">￥{{ goods.price }}</div>
+                    <div class="add-to-cart">ADD TO CART</div>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+    <div id="center-featured" class="d-flex">
+        <ul class="d-flex">
+            {% for goods in featuredList %}
+                <li>
+                    <div class="featured-image"><img src="{{ goods.sku.image.url }}"></div>
+                    <div class="goods-name"><a href="#">{{ goods.sku.name }}</a></div>
+                    <div class="goods-price">￥{{ goods.sku.price }}</div>
+                    <div class="add-to-cart">ADD TO CART</div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div id="center-featured-image">
+            <img src="{% static 'images/slider-banner.jpg' %}">
+            <div id="center-featured-ifo">
+                <div id="center-featured-title">FEATURED PRODUCTS</div>
+                <div id="center-featured-detail">
+                    Here you can taste the special fruits and vegetables from different countries. I believe you can buy the products you want.
+                </div>
+                <a href="#">
+                    <div id="view-all">
+                        VIEW ALL
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="center-banner"></div>
+</div>
+{% endblock center %}

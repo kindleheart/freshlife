@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}user-address{% endblock title %}
+{% block topfiles %}
+<script type="text/javascript" src="{% static 'js/add_to_cart.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/user_center_info.css' %}">
+{% endblock topfiles %}
+
+
+{% block center %}
+<div id="center">
+    <div id="center-content" class="d-flex">
+        <div id="left">
+            <div id="left-title">用户中心</div>
+            <a href="{% url 'user:user' %}"><div class="left-slide"  id="active"><span>&lt</span> 个人信息</div></a>
+            <a href="{% url 'user:order' 1 %}"><div class="left-slide"><span>&lt</span> 全部订单</div></a>
+            <a href="{% url 'user:address' %}"><div class="left-slide"><span>&lt</span> 收货地址</div></a>
+        </div>
+        <div id="right">
+            <div class="right-title">基本信息</div>
+            <div id="user-info">
+                <ul>
+                    <li><span>用户名：</span>{{ user.username }}</li>
+                    {% if address %}
+                        <li><span>联系方式：</span>{{ address.phone }}</li>
+                        <li><span>联系地址：</span>{{ address.addr }}</li>
+                    {% else %}
+                        <li><span>联系方式：</span>无默认</li>
+                        <li><span>联系地址：</span>无默认</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="right-title">最近浏览</div>
+            <div id="nearly-look">
+                <ul class="d-flex">
+                    {% for goods in goods_li %}
+                    <li>
+                        <a href="{% url 'goods:detail' goods.id %}">
+                            <div class="nearly-goods"><img src="{{ goods.image.url }}"></div>
+                        </a>
+                        <div class="goods-name"><a href="#">{{ goods.name }}</a></div>
+                        <div class="goods-price">￥{{ goods.price }}/{{ goods.unite }}</div>
+                        {% csrf_token %}
+                        <div class="add-to-cart" sku_id="{{ goods.id }}">加入购物车</div>
+                    </li>
+                    {% empty %}
+                        无历史浏览记录
+                     {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock center %}

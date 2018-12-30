@@ -1,0 +1,123 @@
+#center {
+    width: 100%;
+}
+#center-content {
+    width: 1300px;
+    height: 100%;
+    margin: 0 auto;
+    padding-left: 35px;
+}
+#left {
+    width: 20%;
+    height: 160px;
+    border: 1px solid #ddd;
+}
+#left-title {
+    width: 100%;
+    height: 46px;
+    border-bottom: 1px solid #ddd;
+    line-height: 46px;
+    font-weight: bolder;
+    padding-left: 20px;
+}
+.left-slide {
+    font-weight: bolder;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    font-size: 15px;
+    color: #333;
+}
+#active {
+    color: #60be74;
+}
+#active span {
+    color: #60be74;
+}
+#right {
+    width: 80%;
+    height: 100%;
+    padding-left: 26px;
+}
+
+#right ul{
+    width: 100%;
+}
+#right li {
+    width: 291px;
+    height: 500px;
+    float: left;
+    margin-right: 37px;
+}
+.goods-image {
+    width: 291px;
+    height: 353px;
+    overflow: hidden;
+}
+.goods-image img {
+    width: 291px;
+    height: 353px;
+    transition-duration: 500ms;
+    transition-property: transform;
+}
+.goods-image img:hover {
+    transform: scale(1.2);
+}
+.goods-name {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.goods-name a {
+    color: black;
+}
+.goods-name a:hover {
+    color: #60be74;
+}
+.goods-price {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+.add-to-cart {
+    transition: all 0.2s;
+    width: 110px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #aaa;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+.add-to-cart:hover {
+    background: #60be74;
+    color: white;
+    border: none;
+    cursor: pointer
+}
+.pagenation {
+    clear: both;
+    height:32px;
+    text-align:right;
+    margin-right: 37px;
+}
+.pagenation a{
+    display:inline-block;
+    border:1px solid #d2d2d2;
+    font-size:12px;
+    padding:7px 10px;
+    color:#666;
+    margin: auto 1px;
+}
+.pagenation a:hover {
+    color: #60be74;
+}
+.pagenation .active{
+    background-color:#fff;
+    color: #60be74;;
+}

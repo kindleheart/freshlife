@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}fresh life{% endblock title %}
+{% block topfiles%}
+<script type="text/javascript" src="{% static 'js/add_to_cart.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock topfiles %}
+
+{% block center %}
+<div id="center" class="container-fluid">
+    <div id="center-activity" class="d-flex">
+        <div id="rotation" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for banner in bannerList %}
+
+                <div class="carousel-item {% if banner.index == 1 %}active{% endif %}">
+                    <a href="{% url 'goods:detail' banner.sku.id %}">
+                        <img class="d-block w-100" src="{{ banner.image.url }}">
+                    </a>
+                    <div class="carousel-caption">
+                        <p>{{ banner.name }}</p>
+                        <span>{{ banner.desc }}</span>
+                        <a href="#"><div class="buy-btn">BUY NOW</div></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#rotation" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#rotation" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div id="promotion">
+            <a href="{% url 'goods:detail' promotionList.0.sku.id %}">
+                <div id="promotion-1">
+                    <img src="{{ promotionList.0.image.url }}" alt="organic">
+                    <div class="promotion-title">
+                        <h6 class="promotion-title-1">FRESH</h6>
+                        <h5 class="promotion-title-1">ORGANIC FRUITS</h5>
+                    </div>
+                </div>
+            </a>
+            <a href="{% url 'goods:detail' promotionList.1.sku.id %}">
+                <div>
+                    <img src="{{ promotionList.1.image.url }}" alt="healthy">
+                    <div class="promotion-title">
+                        <h6 class="promotion-title-2">100%</h6>
+                        <h5 class="promotion-title-2">HEALTHY FOODS</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div id="best-price">
+            <a href="{% url 'goods:detail' recommendGoods.sku.id %}"><div id="best-price-image"><img src="{{ recommendGoods.image.url }}"></div></a>
+            <div id="best-price-title">
+                <div id="best-price-title-1">BEST PRICE ALWAYS</div>
+                <div id="best-price-title-2"></div>
+                <div id="best-price-title-3">Our Delicious Food At Your Doorstep!</div>
+            </div>
+        </div>
+    </div>
+    <div class="center-new-seller">
+        <div class="center-new-seller-title">
+            <div>
+                <span class="center-new-seller-title-green">NEW</span>
+                PRODUCTS
+            </div>
+        </div>
+        <div class="center-new-seller-goods">
+            <ul class="d-flex">
+                {% for goods in newList %}
+                <li>
+                    <div class="center-new-seller-image">
+                        <a href="{% url 'goods:detail' goods.id %}"><img src="{{ goods.image.url }}"></a>
+                    </div>
+                    <div class="goods-name">
+                        <a href="{% url 'goods:detail' goods.id %}">{{ goods.name }}</a>
+                    </div>
+                    <div class="goods-price">￥{{ goods.price }}</div>
+                    {% csrf_token %}
+                    <div class="add-to-cart" sku_id = "{{ goods.id }}">加入购物车</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="center-new-seller">
+        <div class="center-new-seller-title">
+            <div>
+                <span class="center-new-seller-title-green">BEST</span>
+                SELLERS
+            </div>
+        </div>
+        <div class="center-new-seller-goods">
+            <ul class="d-flex">
+               {% for goods in hotList %}
+                <li>
+                    <a href="{% url 'goods:detail' goods.id %}">
+                        <div class="center-new-seller-image"><img src="{{ goods.image.url }}"></div>
+                    </a>
+                    <div class="goods-name">
+                        <a href="{% url 'goods:detail' goods.id %}">{{ goods.name }}</a>
+                    </div>
+                    <div class="goods-price">￥{{ goods.price }}</div>
+                    <div class="add-to-cart" sku_id = "{{ goods.id }}">加入购物车</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="center-featured" class="d-flex">
+        <ul class="d-flex">
+            {% for goods in featuredList %}
+                <li>
+                    <div class="featured-image">
+                        <a href="{% url 'goods:detail' goods.sku.id %}"><img src="{{ goods.sku.image.url }}"></a>
+                    </div>
+                    <div class="goods-name">
+                        <a href="{% url 'goods:detail' goods.sku.id %}">{{ goods.sku.name }}</a>
+                    </div>
+                    <div class="goods-price">￥{{ goods.sku.price }}</div>
+                    <div class="add-to-cart" sku_id = "{{ goods.id }}">加入购物车</div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div id="center-featured-image">
+            <img src="{% static 'images/slider-banner.jpg' %}">
+            <div id="center-featured-ifo">
+                <div id="center-featured-title">FEATURED PRODUCTS</div>
+                <div id="center-featured-detail">
+                    Here you can taste the special fruits and vegetables from different countries. I believe you can buy the products you want.
+                </div>
+                <a href="#">
+                    <div id="view-all">
+                        VIEW ALL
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="center-banner"></div>
+</div>
+{% endblock center %}

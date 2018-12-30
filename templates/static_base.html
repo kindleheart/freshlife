@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   {# 网页标题内容块 #}
+    <title>{% block title %}{% endblock title %}</title>
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src={% static 'js/bootstrap.min.js' %}></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {# 网页顶部引入文件块 #}
+    {% block topfiles %}{% endblock topfiles %}
+</head>
+<body>
+<div id="header" class="container-fluid">
+    <div id="header-content">
+        <div id="header-top" class="d-flex">
+            <div id="welcome-msg" class="mr-auto">欢迎来到 fresh life!</div>
+            <div id="menu" class="ml-auto">
+                    <a href="{% url 'user:login' %}">登录</a>
+                    <a href="{% url 'user:register' %}">注册</a>
+                    <a href="{% url 'user:user' %}">账户</a>
+                    <a href="#">购物车</a>
+                    <a href="#">订单</a>
+            </div>
+        </div>
+        <div id="header-center" class="d-flex">
+            <div id="logo" class="mr-auto"><a href="{% url 'goods:index' %}">FRESH LIFE</a></div>
+            <div id="search" class="ml-auto">
+                <form action="#" method="POST" class="form-inline">
+                    <input id="search-text" type="text" class="form-control" placeholder="Search ..." name="">
+                    <button id="submit" type="submit" class="btn">Submit</button>
+                    <a href="#" class="cart_name">My Cart</a>
+                    <div class="goods_count" id="show_count">0</div>
+                </form>
+            </div>
+        </div>
+        <div id="nav">
+            <a href="{% url 'goods:index' %}">HOME</a>
+            <span href="#">|</span>
+            <a href="#">FRUITS</a>
+            <span href="#">|</span>
+            <a href="#">VEGETABLES</a>
+            <span href="#">|</span>
+            <a href="#">ABOUT US</a>
+        </div>
+    </div>
+</div>
+
+{# 网站主体内容块 #}
+{% block center %}{% endblock center %}
+
+<div id="bottom-logo">FRESH LIFE</div>
+<div id="footer">
+    <span>©2018 All Copyright Reserved <a href="mailto:873268974@qq.com">kindleheart</a></span>
+</div>
+</body>
+</html>

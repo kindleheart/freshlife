@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}fresh life-我的购物车{% endblock title %}
+{% block topfiles%}
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock topfiles %}
+
+{% block center %}
+<div id="center">
+    <div id="center-content">
+        <div class="total_count">全部商品<em>{{ total_count }}</em>件</div>
+        <ul class="cart_list_th d-flex">
+            <li class="col01">商品名称</li>
+            <li class="col02">商品单位</li>
+            <li class="col03">商品价格</li>
+            <li class="col04">数量</li>
+            <li class="col05">小计</li>
+            <li class="col06">操作</li>
+        </ul>
+        <form method="post" action="{% url 'order:place' %}">
+        {% for sku in skus %}
+        <ul class="cart_list_td d-flex">
+            <li class="col01"><input type="checkbox" name="sku_ids" checked value="{{ sku.id }}"></li>
+            <li class="col02"><a href="{% url 'goods:detail' sku.id %}"><img src="{{ sku.image.url }}"></a></li>
+            <li class="col03"><a href="{% url 'goods:detail' sku.id %}">{{ sku.name }}</a>
+                <br><em>{{ sku.price }}/{{ sku.unite }}</em></li>
+            <li class="col04">{{ sku.unite }}</li>
+            <li class="col05">{{ sku.price }}元</li>
+            <li class="col06">
+                <div class="num_add d-flex">
+                    <a href="javascript:;" class="add">+</a>
+                    <input type="text" sku_id = "{{ sku.id }}" class="num_show" value="{{ sku.count }}">
+                    <a href="javascript:;" class="minus">-</a>
+                </div>
+            </li>
+            <li class="col07">{{ sku.amount }}元</li>
+            <li class="col08"><a href="javascript:;">删除</a></li>
+        </ul>
+        {% endfor %}
+        <ul class="settlements d-flex">
+            {% csrf_token %}
+            <li class="col01"><input type="checkbox" name="" checked=""></li>
+            <li class="col02">全选</li>
+            <li class="col03">合计(不含运费)：<span>¥</span><em>{{ total_price }}</em><br>共计<b>{{ total_count }}</b>件商品</li>
+            <li class="col04"><input type="submit" value="去结算"></li>
+        </ul>
+        </form>
+    </div>
+</div>
+{% endblock center %}
