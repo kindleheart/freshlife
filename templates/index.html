@@ -124,7 +124,7 @@
                         <a href="{% url 'goods:detail' goods.sku.id %}">{{ goods.sku.name }}</a>
                     </div>
                     <div class="goods-price">￥{{ goods.sku.price }}</div>
-                    <div class="add-to-cart" sku_id = "{{ goods.id }}">加入购物车</div>
+                    <div class="add-to-cart" sku_id = "{{ goods.sku.id }}">加入购物车</div>
                 </li>
             {% endfor %}
         </ul>
